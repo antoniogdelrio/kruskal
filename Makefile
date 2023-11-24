@@ -1,8 +1,8 @@
 build-no-optimized:
-	gcc kruskal-no-optimized.c -o noopt
+	gcc kruskal-no-optimized.c -o bin/noopt
 
 build-optimized:
-	gcc kruskal-no-optimized.c -o opt
+	gcc kruskal-no-optimized.c -o bin/opt
 
 run-no-optmized: build-no-optimized
 	./noopt
