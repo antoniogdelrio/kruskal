@@ -3,6 +3,9 @@
 #include <time.h>
 #include <string.h>
 
+#define OPTMIZED_STRATEGY 0
+#define UNOPTMIZED_STRATEGY 1
+
 /*
   parent[]: armazena o índice do vértice pai do i-ésimo elemento
   rank[]: armazena a altura até o nó i
@@ -58,14 +61,14 @@ int findParentUnoptimized(int parent[], int component)
   return findParentUnoptimized(parent, parent[component]);
 }
 
-int findParent(int parent[], int component, char *strategy)
+int findParent(int parent[], int component, int strategy)
 {
-  if (!strcmp(strategy, "optimized"))
+  if (strategy == OPTMIZED_STRATEGY)
   {
     return findParentOptimized(parent, component);
   }
 
-  if (!strcmp(strategy, "unoptmized"))
+  if (strategy == UNOPTMIZED_STRATEGY)
   {
     return findParentUnoptimized(parent, component);
   }
@@ -109,20 +112,20 @@ void unionSetUnoptimized(int u, int v, int parent[], int rank[])
   incrementOperations(3);
 }
 
-void unionSet(int u, int v, int parent[], int rank[], char *strategy)
+void unionSet(int u, int v, int parent[], int rank[], int strategy)
 {
-  if (!strcmp(strategy, "optimized"))
+  if (strategy == OPTMIZED_STRATEGY)
   {
     return unionSetOptimized(u, v, parent, rank);
   }
 
-  if (!strcmp(strategy, "unoptmized"))
+  if (strategy == UNOPTMIZED_STRATEGY)
   {
     return unionSetUnoptimized(u, v, parent, rank);
   }
 }
 
-void kruskalAlgo(int nVertexes, int nEdges, int edge[nEdges][3], char *strategy)
+void kruskalAlgo(int nVertexes, int nEdges, int edge[nEdges][3], int strategy)
 {
   qsort(edge, nEdges, sizeof(edge[0]), comparator);
 
@@ -155,12 +158,9 @@ int main(int argc, char *argv[])
   char *strategy;
 
   NUMBER_OF_VERTEX = strtoul(argv[1], 0L, 10);
-  strategy = argv[2];
 
   int totalEdges = (NUMBER_OF_VERTEX * (NUMBER_OF_VERTEX - 1)) / 2;
   int edge[totalEdges][3];
-
-  srand((unsigned int)NUMBER_OF_VERTEX);
 
   for (int i = 0; i < (totalEdges); i++)
   {
@@ -168,20 +168,37 @@ int main(int argc, char *argv[])
   }
 
   int edgesCounter = 0;
-  for (int i = 0; i < NUMBER_OF_VERTEX; i++)
-  {
-    for (int j = i + 1; j < NUMBER_OF_VERTEX && j != i; j++)
-    {
-      edge[edgesCounter][0] = i;
-      edge[edgesCounter][1] = j;
-      edge[edgesCounter][2] = (int)(((float)rand() / (float)(RAND_MAX)) * (float)totalEdges);
-      edgesCounter++;
+
+  for (int s = 0; s < 2; s++) {
+
+    if (s == 0) {
+      fprintf(stdout, "optimized: ");
+    } else {
+      fprintf(stdout, "unoptimized: ");
     }
+
+    for (int k = 0; k < 10; k++) {
+      srand((unsigned int) k);
+      for (int i = 0; i < NUMBER_OF_VERTEX; i++)
+      {
+        for (int j = i + 1; j < NUMBER_OF_VERTEX && j != i; j++)
+        {
+          edge[edgesCounter][0] = i;
+          edge[edgesCounter][1] = j;
+          edge[edgesCounter][2] = (int)(((float)rand() / (float)(RAND_MAX)) * (float)totalEdges);
+          edgesCounter++;
+        }
+      }
+
+      kruskalAlgo(NUMBER_OF_VERTEX, totalEdges, edge, s);
+
+      fprintf(stdout, "%d, ", OPERATIONS);
+
+      OPERATIONS = 0;
+    }
+
+    fprintf(stdout, "\n");
   }
-
-  kruskalAlgo(NUMBER_OF_VERTEX, totalEdges, edge, strategy);
-
-  fprintf(stdout, "%d\n", OPERATIONS);
 
   return 0;
 }
