@@ -9,3 +9,7 @@ run-no-optmized: build-no-optimized
 
 run-optmized: build-optimized
 	./bin/opt
+
+run:
+	gcc kruskal.c -o bin/kruskal
+	./bin/kruskal ${vertexes} ${strategy}
