@@ -80,6 +80,7 @@ void unionSetOptimized(int u, int v, int parent[], int rank[])
 
   if (vParent != uParent)
   {
+    incrementOperations(1);
     if (rank[uParent] < rank[vParent])
     {
       incrementOperations(2);
@@ -87,12 +88,12 @@ void unionSetOptimized(int u, int v, int parent[], int rank[])
     }
     else if (rank[uParent] > rank[vParent])
     {
-      incrementOperations(2);
+      incrementOperations(3);
       parent[vParent] = uParent;
     }
     else
     {
-      incrementOperations(2);
+      incrementOperations(4);
       parent[vParent] = uParent;
       rank[uParent] += 1;
     }
