@@ -1,2 +1,8 @@
 bin/*
 slides/
+
+*.exe
+.vscode/*
+*.png
+__pycache__/
+venv/

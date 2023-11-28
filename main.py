@@ -4,6 +4,7 @@ import sys
 import os
 import statistics
 import matplotlib.pyplot as plt
+import fit
 
 # Parameters
 algorithms = [
@@ -13,7 +14,7 @@ res_mean = {algorithm: [] for algorithm in algorithms}
 res_sd = {algorithm: [] for algorithm in algorithms}
 
 def compile():
-    cmd = "gcc -O0 kruskal.c -o kruskal"
+    cmd = "gcc -O0 kruskal.c -o bin/kruskal"
     subprocess.run(cmd.split())
 
 def set_stack_limit(new_gb_limit=10.0):
@@ -54,6 +55,12 @@ def main():
             mean, sd = grab(n, algorithm)
             res_mean[algorithm].append((n, mean))
             res_sd[algorithm].append((n, sd))
+        fit.fit_and_plot(
+                res_mean[algorithm],
+                res_sd[algorithm],
+                fit.quadratic_function,
+                "Kruskal",
+                algorithm)
 
 if __name__ == "__main__":
     main()
