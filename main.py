@@ -9,12 +9,12 @@ import fit
 # Parameters
 algorithms = [
         'optimized',
-        'unoptmized']
+        'unoptimized']
 res_mean = {algorithm: [] for algorithm in algorithms}
 res_sd = {algorithm: [] for algorithm in algorithms}
 fitting_functions = {
         'optimized': fit.n_squared_log_n_function,
-        'unoptmized': fit.n_squared_log_n_function,
+        'unoptimized': fit.n_squared_log_n_function,
     }
 
 def compile():

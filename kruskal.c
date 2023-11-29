@@ -65,7 +65,7 @@ int findParent(int parent[], int component, char *strategy)
     return findParentOptimized(parent, component);
   }
 
-  if (!strcmp(strategy, "unoptmized"))
+  if (!strcmp(strategy, "unoptimized"))
   {
     return findParentUnoptimized(parent, component);
   }
@@ -117,7 +117,7 @@ void unionSet(int u, int v, int parent[], int rank[], char *strategy)
     return unionSetOptimized(u, v, parent, rank);
   }
 
-  if (!strcmp(strategy, "unoptmized"))
+  if (!strcmp(strategy, "unoptimized"))
   {
     return unionSetUnoptimized(u, v, parent, rank);
   }
