@@ -15,7 +15,7 @@ def pretty_params(function, coefficients):
     elif function == linear_function:
         formatted_str = f"{coefficients[0]:.2e}n + {coefficients[1]:.2e}"
     elif function == n_squared_log_n_function:
-        formatted_str = f"{coefficients[0]:.2e}n²log(n) + {coefficients[1]:.2e}n"
+        formatted_str = f"{coefficients[0]:.1e}n²log(n) + {coefficients[1]:.1e}n² + {coefficients[2]:.1e}n"
     else:
         formatted_str = 'Fitted Curve'
 
