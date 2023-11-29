@@ -117,5 +117,5 @@ def n_log_n_function(n, a, b):
 def linear_function(n, a, b):
     return a * n + b
 
-def n_squared_log_n_function(n, a, b):
-    return a * n**2 * np.log(n) + b * n
+def n_squared_log_n_function(n, a, b, c):
+    return (a * n**2 * np.log(n)) + (b * n**2) + (c * n)
