@@ -12,6 +12,10 @@ algorithms = [
         'unoptmized']
 res_mean = {algorithm: [] for algorithm in algorithms}
 res_sd = {algorithm: [] for algorithm in algorithms}
+fitting_functions = {
+        'optimized': fit.quadratic_function,
+        'unoptmized': fit.n_log_n_function
+    }
 
 def compile():
     cmd = "gcc -O0 kruskal.c -o bin/kruskal"
@@ -61,6 +65,8 @@ def main():
                 fit.quadratic_function,
                 "Kruskal",
                 algorithm)
+
+    fit.fit_and_plot_combined(algorithms, res_mean, res_sd, fitting_functions)
 
 if __name__ == "__main__":
     main()
