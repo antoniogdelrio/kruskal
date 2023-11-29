@@ -13,8 +13,8 @@ algorithms = [
 res_mean = {algorithm: [] for algorithm in algorithms}
 res_sd = {algorithm: [] for algorithm in algorithms}
 fitting_functions = {
-        'optimized': fit.quadratic_function,
-        'unoptmized': fit.n_log_n_function
+        'optimized': fit.n_squared_log_n_function,
+        'unoptmized': fit.n_squared_log_n_function,
     }
 
 def compile():
@@ -62,7 +62,7 @@ def main():
         fit.fit_and_plot(
                 res_mean[algorithm],
                 res_sd[algorithm],
-                fit.quadratic_function,
+                fitting_functions[algorithm],
                 "Kruskal",
                 algorithm)
 

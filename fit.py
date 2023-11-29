@@ -11,11 +11,11 @@ def pretty_params(function, coefficients):
     if function == quadratic_function:
         formatted_str = f"{coefficients[0]:.2e}n² + {coefficients[1]:.2e}n + {coefficients[2]:.2e}"
     elif function == n_log_n_function:
-        # Handle n log n function
         formatted_str = f"{coefficients[0]:.2e}n log(n) + {coefficients[1]:.2e}"
     elif function == linear_function:
-        # For linear function, only show terms for n
         formatted_str = f"{coefficients[0]:.2e}n + {coefficients[1]:.2e}"
+    elif function == n_squared_log_n_function:
+        formatted_str = f"{coefficients[0]:.2e}n²log(n) + {coefficients[1]:.2e}n"
     else:
         formatted_str = 'Fitted Curve'
 
@@ -116,3 +116,6 @@ def n_log_n_function(n, a, b):
 
 def linear_function(n, a, b):
     return a * n + b
+
+def n_squared_log_n_function(n, a, b):
+    return a * n**2 * np.log(n) + b * n
